@@ -2,6 +2,10 @@
 /.env
 /__pycache__/
 /airflow/dags/__pycache__/
-/dbt-env/
+/dbt-env/bin
+/dbt-env/generated
+/dbt-env/include
+/dbt-env/lib
 .DS_Store
+
 
