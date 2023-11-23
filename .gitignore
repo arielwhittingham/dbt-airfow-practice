@@ -1,0 +1,7 @@
+/pipeline.ini
+/.env
+/__pycache__/
+/airflow/dags/__pycache__/
+/dbt-env/
+.DS_Store
+
