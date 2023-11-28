@@ -14,7 +14,7 @@ class SpotifyAPI:
     def __init__(self):
         self.method_type = "ini"  # Setting the method_type attribute to "ini" within the __init__ method
         self.refresh_time = None
-        self.token = None
+        self.token = self._get_and_update_new_token()
 
     def _get_and_update_new_token(self):
         if self.method_type == "ini":
@@ -46,3 +46,30 @@ class SpotifyAPI:
             return self._get_and_update_new_token()
         else:
             return self.token
+
+
+class SpotifyAPIData(SpotifyAPI):
+
+    def __init__(self):
+        super().__init__()
+        self.token = super()._get_and_update_new_token()
+
+    def create_get_request(self, url, headers=None):
+        token = super().get_token()
+
+        headers = {"Authorization": "Bearer " + token}
+
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        return response.json()
+
+    def make_post_request(self, url, data, headers=None):
+        access_token = self.get_access_token()
+        if headers is None:
+            headers = {"Authorization": "Bearer " + access_token}
+
+
+
+
+
+
