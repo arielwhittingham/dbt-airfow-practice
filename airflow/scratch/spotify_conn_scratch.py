@@ -1,7 +1,7 @@
 import time
 import requests
 import datetime
-import configparser
+
 from airflow.custom_utils.spotify_api.scripts.spotify_auth import SpotifyAPI
 
 
