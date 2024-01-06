@@ -3,6 +3,7 @@ import configparser
 import base64
 import json
 import datetime
+import os
 
 
 class SpotifyAPI:
@@ -18,19 +19,13 @@ class SpotifyAPI:
 
     def __init__(self):
         self.method_type = "ini"  # Setting the method_type attribute to "ini" within the __init__ method
-        self.client_creds_refresh_time = None
+        self.client_creds_refresh_time = datetime.datetime(1,1,1)
         self.client_creds_token = None
-        self.auth_refresh_time = None                                            # removal of () to get this property
+        self.auth_refresh_time = datetime.datetime(1,1,1)
         self.auth_token = None
 
     @property
     def _get_and_update_client_credentials_token(self):
-
-        # encode credentials into bytes, then decode into a string for the HTTP POST request to Spotify to authenticate
-        # BASE64_ENCODED_HEADER_STRING = base64.b64encode(bytes(f"{CLIENT_ID}:{CLIENT_SECRET}", "ISO-8859-1")).decode(
-        #     "ascii")
-        #
-        #
 
         if self.method_type == "ini":
             parser = configparser.ConfigParser()
@@ -84,10 +79,14 @@ class SpotifyAPI:
         # if self.method_type == "ini":
         try:
             parser = configparser.ConfigParser()
-            parser.read("pipeline.ini")
+
+            parser_path = os.path.expanduser("~")
+            parser_file = os.path.join(parser_path, "workspace/pipeline.ini")
+            parser.read(parser_file)
+            token_url = SpotifyAPI.token_url
 
             auth_options = {
-                'url': SpotifyAPI.token_url,
+                'url': token_url,
                 'headers': {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization': 'Basic ' +
@@ -110,11 +109,11 @@ class SpotifyAPI:
                 return self.auth_token
 
         except FileNotFoundError as exc:
-            print(exc.args)
+            print(exc)
         except requests.exceptions.RequestException as exc:
             print("Invalid Request: " + str(exc.args))
         except Exception as exc:
-            print(exc.args)
+            print(exc)
 
     def _check_to_get_new_auth_token(self):
         if datetime.datetime.now() > self.auth_refresh_time:
