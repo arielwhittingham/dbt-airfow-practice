@@ -2,7 +2,7 @@ import sys
 import time
 import requests
 import datetime
-from airflow.custom_utils.spotify_api.scripts.spotify_auth import SpotifyAPI
+from airflow.custom_utils.spotify_api.scripts import spotify_auth
 
 
 def get_header(auth_token):
@@ -29,7 +29,7 @@ def get_recently_played(token, start_ts):
     return result
 
 def main():
-    sp = SpotifyAPI()
+    sp = spotify_auth.SpotifyAPI()
     print(get_recent())
     result = get_recently_played(sp.get_auth_token(),get_recent())
     print(result.json())
