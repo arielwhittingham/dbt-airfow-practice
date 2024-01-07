@@ -1,6 +1,7 @@
 /pipeline.ini
 /.env
-/__pycache__/
+*/__pycache__/*
+*__pycache__*
 /airflow/dags/__pycache__/
 /dbt-env/bin
 /dbt-env/generated

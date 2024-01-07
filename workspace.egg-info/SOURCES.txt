@@ -1,0 +1,12 @@
+README.md
+setup.py
+airflow/__init__.py
+airflow/webserver_config.py
+airflow/custom_utils/__init__.py
+airflow/custom_utils/spotify_api/__init__.py
+airflow/custom_utils/spotify_api/scripts/__init__.py
+airflow/custom_utils/spotify_api/scripts/spotify_auth.py
+workspace.egg-info/PKG-INFO
+workspace.egg-info/SOURCES.txt
+workspace.egg-info/dependency_links.txt
+workspace.egg-info/top_level.txt
