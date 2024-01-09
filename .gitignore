@@ -1,8 +1,12 @@
+# remove already chached files with this command:
+# $ git rm --cached airflow/data/* [or some other pathame/file]
+
 /pipeline.ini
 /.env
 */__pycache__/*
 *__pycache__*
 /airflow/dags/__pycache__/
+/airflow/data/
 /dbt-env/bin
 /dbt-env/generated
 /dbt-env/include
