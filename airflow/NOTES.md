@@ -18,6 +18,16 @@ check:
 export AIRFLOW_HOME=~/workspace/airflow
 echo $AIRFLOW_HOME
 
+#if not recognizing new dags
+airflow db migrate
+
+# pid issues when trying to restart webserver try deleting .pid file:
+
+~/workspace/airflow$ rm -rf airflow-webserver.pid
+
+# find and kill process
+ps | grep airflow 
+
 run:
 airflow db init && airflow webserver -p 8080 && airflow scheduler
 

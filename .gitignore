@@ -3,6 +3,9 @@
 
 /pipeline.ini
 /.env
+/airflow/.setup_airflowuser.sh
+/airflow/logs/scheduler/*
+/airflow/logs/*
 */__pycache__/*
 *__pycache__*
 /airflow/dags/__pycache__/

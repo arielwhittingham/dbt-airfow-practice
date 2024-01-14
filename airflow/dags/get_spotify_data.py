@@ -3,10 +3,15 @@ from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 from airflow.utils.dates import days_ago
 
+args={
+    'retries': 0,
+}
+
 dag = DAG(
     'get_spotify_recently_played_data_test',
     description='Get Spotify data and export to a local file',
     schedule_interval=timedelta(minutes=20),
+    default_args=args,
     start_date=days_ago(1),
 )
 
@@ -27,7 +32,7 @@ t3 = BashOperator(
     task_id='run_spotify_test_script',
     start_date=days_ago(1),
     depends_on_past=True,
-    bash_command='python3 spotify_conn_scratch.py airflow',
+    bash_command='python3 ~/workspace/airflow/spotify_conn_scratch.py airflow',
     dag=dag,
 )
 
